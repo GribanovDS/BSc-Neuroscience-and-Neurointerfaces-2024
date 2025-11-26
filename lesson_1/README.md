@@ -383,17 +383,10 @@ non_blocking_cond_wait(cardio_event, 'first cardio', 12)
 
 ### 4. Считываем и выводим PSD в реал-тайме
 
-#### Импорт библиотек для обработки PSD и определение вспомогательной функции
-```python
-import numpy as np
-
-def integrate_band(freqs, psd, low, hi):
-    mask = (freqs>=low) & (freqs<=hi)
-    if not np.any(mask): return 0.0
-    return float(np.trapz(psd[mask], freqs[mask]))
-```
 #### Определение глобальных переменных и обработчика PSD
 ```python
+from CapsuleSDK.PSDData import PSDData, PSDData_Band
+
 psd_freqs = None
 psd_vals = None
 alpha_low = None
